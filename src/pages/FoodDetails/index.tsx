@@ -88,6 +88,17 @@ const FoodDetails: React.FC = () => {
       });
 
       setExtras(updatedExtras);
+
+      await api
+        .get(`favorites/${data.id}`)
+        .then(favoriteResponse => {
+          if (favoriteResponse.status === 200) {
+            setIsFavorite(true);
+          }
+        })
+        .catch(() => {
+          setIsFavorite(false);
+        });
     }
 
     loadFood();
